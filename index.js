@@ -1,7 +1,7 @@
 const plays = require('./plays.json');
 const invoices = require('./invoices.json');
 
-function format(aNumber) {
+function usd(aNumber) {
   return new Intl.NumberFormat("en-US",
     {
       style: "currency", currency: "USD",
@@ -49,10 +49,10 @@ function statement(invoice, plays) {
   for (let perf of invoice.performances) {
     volumeCredits += volumeCreditsFor(perf);
     // print line for this order
-    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${perf.audience} seats)\n`;
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))}(${perf.audience} seats)\n`;
     totalAmount += amountFor(perf);
   }
-  result += `Amount owed is ${format(totalAmount / 100)}\n`;
+  result += `Amount owed is ${usd(totalAmount)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   return result;
 }
