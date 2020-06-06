@@ -28,7 +28,7 @@ function volumeCreditsFor(perf) {
   return volumeCredits;
 }
 
-function appleSauce() {
+function totalAmount() {
   let totalAmount = 0;
   for (let perf of invoice.performances) {
     totalAmount += amountFor(perf);
@@ -63,8 +63,7 @@ function statement(invoice, plays) {
   for (let perf of invoice.performances) {
     result += ` ${playFor(perf).name}: ${usd(amountFor(perf))}(${perf.audience} seats)\n`;
   }
-  let totalAmount = appleSauce();
-  result += `Amount owed is ${usd(totalAmount)}\n`;
+  result += `Amount owed is ${usd(totalAmount())}\n`;
   result += `You earned ${totalVolumeCredits()} credits\n`;
   return result;
 }
